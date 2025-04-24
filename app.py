@@ -7,8 +7,8 @@ app = Sanic("ModerationServer")
 MODERATION_FOLDER = os.path.abspath("modapps")
 app.static('/static', './static')
 @app.route("/")
-async def serve_moderation_file(request, filename):
-    file_path = os.path.join(MODERATION_FOLDER, filename)
+async def index(request):
+    return await load_template(request, 'index.html')
 
     if not os.path.isfile(file_path):
         return response.text("File not found", status=404)
