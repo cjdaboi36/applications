@@ -1,0 +1,274 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+main {
+    height: 100vh;
+    background: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5vw;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.navbar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 2vw 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    flex-wrap: wrap;
+}
+
+.navbar .logo {
+    font-size: 2vw;
+    font-weight: 700;
+}
+
+.navbar .logo img {
+    height: 4vw;
+    width: auto;
+}
+
+.navbar ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2vw;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar ul li {
+    position: relative;
+}
+
+.navbar ul li::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.3vw;
+    width: 100%;
+    height: 0.3vw;
+    background: #fff;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .5s;
+}
+
+.navbar ul li:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.navbar ul li a {
+    font-size: 1.5vw;
+    font-weight: 500;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    gap: 5vw;
+    height: 100vh;
+    padding: 4vw 8vw 0;
+    color: #fff;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+.info h1 {
+    font-size: 4vw;
+}
+
+.info p {
+    margin: 1vw 0 2vw;
+    font-size: 1.6vw;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1vw 4vw;
+    background: #fff;
+    border-radius: 3vw;
+    box-shadow: 0 0 1vw rgba(0, 0, 0, .1);
+    font-size: 1.5vw;
+    color: #333;
+    font-weight: 600;
+}
+
+.login-box {
+    width: 40vw;
+    border: 0.2vw solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(3vw);
+    box-shadow: 0 0 1vw rgba(0, 0, 0, .2);
+    border-radius: 1vw;
+    padding: 4vw 3vw;
+}
+
+.login-box h1 {
+    font-size: 3vw;
+    text-align: center;
+    line-height: 1;
+}
+
+.login-box .input-box {
+    position: relative;
+    margin: 2vw 0;
+}
+
+.login-box .input-box input {
+    width: 100%;
+    background: transparent;
+    border: 0.2vw solid rgba(255, 255, 255, .2);
+    outline: none;
+    border-radius: 3vw;
+    padding: 1.3vw 4vw 1.3vw 2vw;
+    font-size: 1.4vw;
+    color: #fff;
+}
+
+.login-box .input-box input::placeholder {
+    color: #fff;
+}
+
+.login-box .input-box i {
+    position: absolute;
+    right: 2vw;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2vw;
+}
+
+.login-box .remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2vw;
+    margin: -1vw 0 1vw;
+}
+
+.login-box .remember-forgot label {
+    display: flex;
+}
+
+.login-box .remember-forgot label input {
+    accent-color: #fff;
+    margin-right: 0.5vw;
+}
+
+.login-box .remember-forgot a:hover,
+.login-box .register-link a:hover {
+    text-decoration: underline;
+}
+
+.login-box .btn {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5vw;
+}
+
+.login-box .register-link {
+    display: flex;
+    justify-content: center;
+    font-size: 1.2vw;
+    margin-top: 1vw;
+}
+
+.login-box .register-link a {
+    font-weight: 600;
+    margin-left: 0.5vw;
+}
+
+/* ---------------------- Media Queries for Responsiveness ---------------------- */
+
+/* For devices up to 768px (tablets and smaller) */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 3vw 5vw;
+    }
+
+    .content {
+        flex-direction: column;
+        gap: 5vw;
+        padding: 4vw 5vw 0;
+    }
+
+    .info h1 {
+        font-size: 6vw;
+    }
+
+    .info p {
+        font-size: 3vw;
+    }
+
+    .login-box {
+        width: 70%;
+        padding: 5vw 4vw;
+    }
+
+    .navbar ul li {
+        margin-left: 2vw;
+    }
+
+    .btn {
+        padding: 1.5vw 6vw;
+        font-size: 2vw;
+    }
+}
+
+/* For devices up to 480px (phones and smaller) */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 3vw 3vw;
+    }
+
+    .content {
+        flex-direction: column;
+        padding: 3vw 4vw;
+    }
+
+    .info h1 {
+        font-size: 7vw;
+    }
+
+    .info p {
+        font-size: 4vw;
+    }
+
+    .login-box {
+        width: 90%;
+        padding: 6vw 5vw;
+    }
+
+    .navbar ul li {
+        margin-left: 3vw;
+    }
+
+    .btn {
+        padding: 2vw 7vw;
+        font-size: 2.5vw;
+    }
+}
