@@ -105,7 +105,16 @@ body {
   text-align: center;
   margin: 20px 0 15px;
 }
-
+.btn {
+    display: inline-block;
+    padding: 1vw 4vw;
+    background: #fff;
+    border-radius: 3vw;
+    box-shadow: 0 0 1vw rgba(0, 0, 0, .1);
+    font-size: 1.5vw;
+    color: #333;
+    font-weight: 600;
+}
 .register-link p a {
   color: #fff;
   text-decoration: none;
