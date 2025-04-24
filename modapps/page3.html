@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moderation Application</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <form action="">
+            <h1>Section 2</h1>
+            <div class="input-box">
+                <input type="text" data-qid="q10" placeholder="If we were to hire you would you complete quota?"required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="text" data-qid="q11" placeholder="If we hire you will you be active?"required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <div class="input-box">
+                <input type="text" data-qid="q12" placeholder="Are you aware that if you are inactive we will demote you?"required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <div class="input-box">
+                <input type="text" data-qid="q13" placeholder="Why do you want this position?"required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <div class="input-box">
+                <input type="text" data-qid="q14" placeholder="What is your timezone?"required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+                <button type="submit" class="btn" id="nextBtn">Next</button>
+        </form>
+    </div>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      // Loop through all inputs with data-qid
+      const inputs = document.querySelectorAll('[data-qid]');
+      
+      inputs.forEach(input => {
+        const key = input.dataset.qid;
+
+        // Pre-fill if there's saved data
+        input.value = localStorage.getItem(key) || "";
+      });
+
+      const nextBtn = document.getElementById("nextBtn");
+      nextBtn.addEventListener("click", function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        // Save all input values to localStorage
+        inputs.forEach(input => {
+          const key = input.dataset.qid;
+          localStorage.setItem(key, input.value);
+        });
+
+        // Redirect to next page
+        window.location.href = "page4.html"; // Update to the next page
+      });
+    });
+  </script>
+</body>
+
+</html>

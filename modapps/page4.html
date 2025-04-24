@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moderation Application</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="wrapper">
+        <form id="applicationForm">
+            <h1>Section 3</h1>
+            <div class="input-box">
+                <input type="text" data-qid="q15" placeholder="Why should we hire you out of other applicants?" required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="text" data-qid="q16" placeholder="What can you bring to Cj's Commissions as moderator?" required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <div class="input-box">
+                <input type="text" data-qid="q17" placeholder="On a scale of 1 - 10 how active will you be?" required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <div class="input-box">
+                <input type="text" data-qid="q18" placeholder="As a moderator what should you do?" required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <div class="input-box">
+                <input type="text" data-qid="q19" placeholder="What should you do when a colleague abuses their rank?" required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            // Save input to localStorage on change
+            document.querySelectorAll("[data-qid]").forEach(input => {
+                const key = input.getAttribute("data-qid");
+                input.value = localStorage.getItem(key) || "";
+                input.addEventListener("input", () => {
+                    localStorage.setItem(key, input.value);
+                });
+            });
+
+            const questionMap = {
+                q1: "What is your discord username?",
+                q2: "What is your discord userid?",
+                q3: "What is your roblox username?",
+                q4: "What is the link to your roblox profile?",
+                q5: "Why do you want to work at Cj's Commissions?",
+                q6: "Do you have any past experience in the roblox tech industry?",
+                q7: "What experience do you have in moderation?",
+                q8: "If a raid happens, what would you do?",
+                q9: "If someone breaks a serious rule what will you do?",
+                q10: "If we were to hire you would you complete quota?",
+                q11: "If we hire you will you be active?",
+                q12: "Are you aware that if you are inactive we will demote you?",
+                q13: "Why do you want this position?",
+                q14: "What is your timezone?",
+                q15: "Why should we hire you out of other applicants?",
+                q16: "What can you bring to Cj's Commissions as moderator?",
+                q17: "On a scale of 1 - 10 how active will you be?",
+                q18: "As a moderator what should you do?",
+                q19: "What should you do when a colleague abuses their rank?"
+            };
+
+            document.getElementById("applicationForm").addEventListener("submit", async function (e) {
+                e.preventDefault();
+
+                const fields = [];
+                let allFilled = true;
+
+                for (const key in questionMap) {
+                    const value = (localStorage.getItem(key) || "").trim();
+                    if (!value) allFilled = false;
+
+                    fields.push({
+                        name: questionMap[key],
+                        value: value || "Not provided",
+                        inline: true
+                    });
+                }
+
+                if (!allFilled) {
+                    alert("Please make sure all questions are answered before submitting!");
+                    return;
+                }
+
+                const appKey = `APP${Date.now()}`;
+                localStorage.setItem("lastAppID", appKey);
+                fields.unshift({
+                    name: "Application ID",
+                    value: `\`\`${appKey}\`\``,
+                    inline: false
+                });
+
+                const embed = {
+                    title: "An new application has came through",
+                    color: 0x7fd957,
+                    fields: fields,
+                    footer: {
+                        text: `Submitted at ${new Date().toLocaleString()}`
+                    }
+                };
+
+                const webhookURL = "https://discord.com/api/webhooks/1364753857975943260/kpGIbqrJkpoz32acaUSEY5zoNwAKoXtT0GSTU9_yVehpODnIR_jD3fTQQTo9ZhrwNE-l";
+
+                try {
+                    const response = await fetch(webhookURL, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ embeds: [embed] })
+                    });
+
+                    if (!response.ok) throw new Error("Failed to send data to Discord");
+
+                    for (const key in questionMap) {
+                        localStorage.removeItem(key);
+                    }
+
+                    window.location.href = "complete.html";
+                } catch (error) {
+                    console.error("Error:", error);
+                    alert("There was a problem submitting your form.");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

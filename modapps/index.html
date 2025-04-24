@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moderation Application</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <form action="">
+            <h1>User Information</h1>
+            <div class="input-box">
+                <input type="text" data-qid="q1" placeholder="What is your discord username?"required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="text" data-qid="q2" placeholder="What is your discord userid?"required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <div class="input-box">
+                <input type="text" data-qid="q3" placeholder="What is your roblox username?"required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <div class="input-box">
+                <input type="text" data-qid="q4" placeholder="What is the link to your roblox profile?"required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+                <button type="submit" class="btn" id="nextBtn">Next</button>
+        </form>
+    </div>
+
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const nextBtn = document.getElementById("nextBtn");
+        const inputs = document.querySelectorAll('input[data-qid]');
+    
+        nextBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+    
+          let allFilled = true;
+    
+          inputs.forEach(input => {
+            const value = input.value.trim();
+            if (!value) {
+              allFilled = false;
+            } else {
+              input.style.border = ""; // clear red border if re-filled
+              localStorage.setItem(input.dataset.qid, value); // store input
+            }
+          });
+    
+          if (!allFilled) {
+            alert("Please fill out all fields before continuing.");
+            return;
+          }
+    
+          // Go to the next page
+          window.location.href = "moderation/page2.html"; // or your next page
+        });
+      });
+    </script>
+</body>
+
+</html>
