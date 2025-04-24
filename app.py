@@ -8,10 +8,9 @@ MODERATION_FOLDER = os.path.abspath("modapps")
 app.static('/static', './static')
 @app.route("/")
 async def index(request):
-    return await load_template(request, './templates/index.html')
-
-    if not os.path.isfile(file_path):
-        return response.text("File not found", status=404)
+    with open('./templates/index.html') as f:
+        html_content = f.read()
+    return response.html(html_content)
 
     return await response.file(file_path)
 @app.route("/moderation/<filename>")
